@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Content — Sundari Creation</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none;">
+      <div class="brand-badge">SC</div>
+      <div class="brand-name">SUNDARI CREATION</div>
+    </a>
+    <div class="nav-links"><a href="index.html">← Website par wapas jaayein</a></div>
+  </div>
+</nav>
+
+<!-- PASSWORD GATE -->
+<div class="admin-gate" id="gateScreen">
+  <h2 class="hi display" style="font-size:26px; color:#3d1a0a; margin-bottom:10px;">Admin Login</h2>
+  <p style="color:#6b5744; margin-bottom:22px;">Sirf aap hi content upload kar sakte hain. Apna admin password daalein.</p>
+  <div class="field">
+    <input type="text" id="adminKeyInput" placeholder="Admin password" style="width:100%; padding:12px 14px; border:1.5px solid #e2d3b8; border-radius:8px; font-size:15px;">
+  </div>
+  <button class="submit-btn" id="unlockBtn">Unlock</button>
+  <p id="gateError" style="color:#a02020; margin-top:12px; font-size:13.5px;"></p>
+</div>
+
+<!-- UPLOAD FORM (hidden until unlocked) -->
+<div class="upload-wrap" id="uploadScreen" style="display:none;">
+  <div class="section-head" style="margin-bottom:24px;">
+    <h2 class="hi">नया कंटेंट अपलोड करें</h2>
+    <p>Audio, Video, Photo ya sirf Text announcement — jo bhi chahiye, yahan se upload karein.</p>
+  </div>
+
+  <div class="upload-card">
+    <div class="type-tabs" id="typeTabs">
+      <div class="type-tab active hi" data-type="audio">🎵 Audio</div>
+      <div class="type-tab hi" data-type="video">🎬 Video</div>
+      <div class="type-tab hi" data-type="photo">📷 Photo</div>
+      <div class="type-tab hi" data-type="text">📝 Text</div>
+    </div>
+
+    <form id="uploadForm">
+      <div class="field">
+        <label class="hi">टाइटल (Hindi) *</label>
+        <input type="text" id="title" required placeholder="जैसे: राणी सा री रम्मत">
+      </div>
+      <div class="field">
+        <label>Title (English)</label>
+        <input type="text" id="titleEnglish" placeholder="e.g. Rani Sa Ri Rammat">
+      </div>
+      <div class="field">
+        <label class="hi">केटेगरी</label>
+        <select id="category">
+          <option value="song">Song</option>
+          <option value="bhajan">Bhajan</option>
+          <option value="katha">Katha</option>
+          <option value="music-distribution">Music Distribution</option>
+          <option value="session-pack">Session Pack</option>
+          <option value="mainstage-setup">MainStage Setup</option>
+          <option value="announcement">Announcement</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field" id="fileField">
+        <label class="hi">फ़ाइल चुनें (Audio/Video/Photo)</label>
+        <input type="file" id="fileInput">
+      </div>
+      <div class="field">
+        <label class="hi">विवरण / Description</label>
+        <textarea id="description" placeholder="Short description..."></textarea>
+      </div>
+      <div class="field">
+        <label class="hi">कंपोज़र</label>
+        <input type="text" id="composer" placeholder="Composer name">
+      </div>
+      <div class="field">
+        <label class="hi">पब्लिशर</label>
+        <input type="text" id="publisher" placeholder="Publisher name">
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Upload Karein</button>
+      <div class="status-msg" id="statusMsg"></div>
+    </form>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/upload.js"></script>
+</body>
+</html>
