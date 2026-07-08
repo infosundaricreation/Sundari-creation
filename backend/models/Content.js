@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const contentSchema = new mongoose.Schema({
-  // 'audio' | 'video' | 'photo' | 'text'
+  // 'audio' | 'video' | 'photo' | 'text' | 'package'
   type: {
     type: String,
-    enum: ['audio', 'video', 'photo', 'text'],
+    enum: ['audio', 'video', 'photo', 'text', 'package'],
     required: true
   },
   title: { type: String, required: true, trim: true },

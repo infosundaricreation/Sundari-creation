@@ -58,7 +58,7 @@ function renderShop() {
 }
 
 function iconFor(type) {
-  return { audio: '🎵', video: '🎬', photo: '📷', text: '📝' }[type] || '📁';
+  return { audio: '🎵', video: '🎬', photo: '📷', text: '📝', package: '📦' }[type] || '📁';
 }
 
 function renderGallery() {

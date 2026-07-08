@@ -24,7 +24,7 @@ unlockBtn.addEventListener('click', async () => {
 });
 
 // ---- Type tabs ----
-let selectedType = 'audio';
+let selectedType = 'package';
 const typeTabs = document.querySelectorAll('.type-tab');
 const fileField = document.getElementById('fileField');
 const fileInput = document.getElementById('fileInput');
@@ -40,7 +40,7 @@ typeTabs.forEach(tab => {
       fileInput.required = false;
     } else {
       fileField.style.display = 'block';
-      const acceptMap = { audio: 'audio/*', video: 'video/*', photo: 'image/*' };
+      const acceptMap = { audio: 'audio/*', video: 'video/*', photo: 'image/*', package: '*' };
       fileInput.accept = acceptMap[selectedType] || '*';
     }
   });
