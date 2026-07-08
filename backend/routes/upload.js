@@ -31,7 +31,7 @@ function checkAdminKey(req, res, next) {
 // POST /api/upload  -> upload audio/video/photo (file) OR text-only post
 router.post('/', checkAdminKey, upload.single('file'), async (req, res) => {
   try {
-    const { type, title, titleEnglish, description, category, composer, publisher } = req.body;
+    const { type, title, titleEnglish, description, category, composer, publisher, forSale, price } = req.body;
 
     if (!type || !title) {
       return res.status(400).json({ error: 'Type aur title zaroori hai.' });
@@ -50,7 +50,9 @@ router.post('/', checkAdminKey, upload.single('file'), async (req, res) => {
       composer,
       publisher,
       fileUrl: req.file ? req.file.path : '',
-      thumbnailUrl: req.file && req.file.path ? req.file.path : ''
+      thumbnailUrl: req.file && req.file.path ? req.file.path : '',
+      forSale: forSale === 'true' || forSale === true,
+      price: price ? Number(price) : 0
     });
 
     await content.save();

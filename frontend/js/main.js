@@ -1,7 +1,9 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const galleryGrid = document.getElementById('galleryGrid');
+const shopGrid = document.getElementById('shopGrid');
 const filterBar = document.getElementById('filterBar');
+const WHATSAPP_NUMBER = '918619494371'; // country code + number, no + or spaces
 let allItems = [];
 let currentFilter = 'all';
 
@@ -11,12 +13,48 @@ async function loadContent() {
     if (!res.ok) throw new Error('Server response nahi de raha');
     allItems = await res.json();
     renderGallery();
+    renderShop();
   } catch (err) {
-    galleryGrid.innerHTML = `<div class="empty-state">
+    const errMsg = `<div class="empty-state">
       Content load nahi ho paaya. Backend URL check karein (js/config.js).<br>
       Error: ${err.message}
     </div>`;
+    galleryGrid.innerHTML = errMsg;
+    if (shopGrid) shopGrid.innerHTML = errMsg;
   }
+}
+
+function renderShop() {
+  if (!shopGrid) return;
+  const items = allItems.filter(i => i.forSale);
+
+  if (items.length === 0) {
+    shopGrid.innerHTML = `<div class="empty-state">अभी कोई item बिक्री के लिए उपलब्ध नहीं है। जल्द ही आएगा!</div>`;
+    return;
+  }
+
+  shopGrid.innerHTML = items.map(item => {
+    const waMsg = encodeURIComponent(`Namaste! Mujhe "${item.title}" (₹${item.price}) khareedna hai. Payment kaise karun?`);
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+    let mediaHtml = `<div class="media">${iconFor(item.type)}</div>`;
+    if (item.type === 'photo' && item.fileUrl) {
+      mediaHtml = `<div class="media"><img src="${item.fileUrl}" alt="${item.title}" loading="lazy"></div>`;
+    }
+
+    return `
+      <div class="gcard">
+        ${mediaHtml}
+        <div class="body">
+          <span class="tag">${item.category || 'other'}</span>
+          <h4 class="hi">${item.title}</h4>
+          ${item.titleEnglish ? `<span class="en">${item.titleEnglish}</span>` : ''}
+          ${item.description ? `<p>${item.description}</p>` : ''}
+          <div style="font-size:22px; font-weight:800; color:#8b1d1d; margin:10px 0;">₹${item.price}</div>
+          <a href="${waLink}" target="_blank" class="btn btn-gold" style="display:block; text-align:center; padding:10px; font-size:14px;">🛒 WhatsApp पर Buy करें</a>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function iconFor(type) {

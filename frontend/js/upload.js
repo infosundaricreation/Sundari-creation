@@ -46,6 +46,13 @@ typeTabs.forEach(tab => {
   });
 });
 
+// ---- For Sale toggle ----
+const forSaleCheckbox = document.getElementById('forSale');
+const priceField = document.getElementById('priceField');
+forSaleCheckbox.addEventListener('change', () => {
+  priceField.style.display = forSaleCheckbox.checked ? 'block' : 'none';
+});
+
 // ---- Form submit ----
 const form = document.getElementById('uploadForm');
 const submitBtn = document.getElementById('submitBtn');
@@ -73,6 +80,8 @@ form.addEventListener('submit', async (e) => {
   formData.append('description', document.getElementById('description').value.trim());
   formData.append('composer', document.getElementById('composer').value.trim());
   formData.append('publisher', document.getElementById('publisher').value.trim());
+  formData.append('forSale', forSaleCheckbox.checked);
+  formData.append('price', document.getElementById('price').value.trim());
   if (fileInput.files[0]) formData.append('file', fileInput.files[0]);
 
   submitBtn.disabled = true;

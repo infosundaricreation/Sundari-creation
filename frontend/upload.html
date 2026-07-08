@@ -74,6 +74,16 @@
         <label class="hi">विवरण / Description</label>
         <textarea id="description" placeholder="Short description..."></textarea>
       </div>
+      <div class="field" style="background:#fdf3e3; padding:14px; border-radius:8px; border:1.5px dashed #d4a853;">
+        <label class="hi" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="forSale" style="width:18px; height:18px;">
+          इसे बेचना है? (Shop में दिखेगा, WhatsApp se buy button aayega)
+        </label>
+        <div id="priceField" style="margin-top:10px; display:none;">
+          <label class="hi">कीमत (₹)</label>
+          <input type="text" id="price" placeholder="जैसे: 199">
+        </div>
+      </div>
       <div class="field">
         <label class="hi">कंपोज़र</label>
         <input type="text" id="composer" placeholder="Composer name">

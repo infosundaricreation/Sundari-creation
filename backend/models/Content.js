@@ -30,6 +30,9 @@ const contentSchema = new mongoose.Schema({
   // Cloudinary file URL (audio/video/photo). Empty for pure text posts.
   fileUrl: { type: String, default: '' },
   thumbnailUrl: { type: String, default: '' },
+  // ---- Selling fields ----
+  forSale: { type: Boolean, default: false },
+  price: { type: Number, default: 0 }, // in INR
   createdAt: { type: Date, default: Date.now }
 });
 

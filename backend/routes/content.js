@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
     const filter = {};
     if (req.query.category) filter.category = req.query.category;
     if (req.query.type) filter.type = req.query.type;
+    if (req.query.forSale) filter.forSale = req.query.forSale === 'true';
 
     const items = await Content.find(filter).sort({ createdAt: -1 });
     res.json(items);
